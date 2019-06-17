@@ -148,7 +148,7 @@ def forecast_month(model, history, n_input):
 
 def forecaster(dataset):
 # evaluate model and get scores
-	n_input = 7
+	n_input = 1
 	model = build_model(dataset, n_input)
 	history = [x for x in dataset]
 	forecaster = forecast_month(model, history, n_input)
