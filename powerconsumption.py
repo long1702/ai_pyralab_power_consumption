@@ -117,12 +117,13 @@ def forecast(model, history, n_input):
 
 def forecast_month(model, history, n_input):
 	next_month_val = 0
-	for _ in range(30):
+        a = len(history[0])
+	for _ in range(30 - a):
 		predict_day = forecast(model, history, n_input)
 		next_month_val  += predict_day
 		history = numpy.append(history, predict_day)
 		history = [array(history)]		
-	return next_month_val/30
+	return next_month_val
 
 
 # evaluate a single model
@@ -159,13 +160,15 @@ def on_message(client, userdata, message):
 	tempStr = message.payload.decode("utf-8")
 	String = tempStr[1:len(tempStr) - 1]
 	dataset = String.split(',')
+        total = 0
 	for i in range(len(dataset)):
+                total += float(dataset[i])
 		temp.append(float(dataset[i]))
 	temp = [temp]
 	pT = forecaster(array(temp))
-	print(str(pT[0][0]))
+	print(str(pT[0][0]+total))
 	client.subscribe("forecast/update")
-	client.publish("forecast/update", str(pT[0][0]))
+	client.publish("forecast/update", str(pT[0][0]+total))
 ########################################
 
 broker_address="baokhoa.tk"
