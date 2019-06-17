@@ -83,7 +83,7 @@ def build_model(train, n_input):
 	# prepare data
 	train_x, train_y = to_supervised(train, n_input)
 	# define parameters
-	verbose, epochs, batch_size = 0, 50, 16
+	verbose, epochs, batch_size = 0, 100, 16
 	n_timesteps, n_features, n_outputs = train_x.shape[1], 1, train_y.shape[1]
 	# reshape output into [samples, timesteps, features]
 	train_y = train_y.reshape((train_y.shape[0], train_y.shape[1], 1))
